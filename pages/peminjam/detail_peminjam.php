@@ -75,7 +75,7 @@ $data = mysqli_fetch_assoc($dataPeminjamById);
             <div class="mb-3 row">
               <label for="tglpeminjaman" class="col-sm-4 col-form-label fw-bold">Tanggal Peminjaman</label>
               <div class="col-sm-8">
-                <input type="text" readonly class="form-control-plaintext border-bottom border-1" id="tlgpeminjaman" value="<?= date('l, d F Y H:i:s', $data['created_at']) ?>">
+                <input type="text" readonly class="form-control-plaintext border-bottom border-1" id="tlgpeminjaman" value="<?= date('d F Y H:i:s', $data['created_at']) ?>">
               </div>
             </div>
           </div>
