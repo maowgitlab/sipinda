@@ -34,7 +34,7 @@
   <?php require_once "vendor/autoload.php"; ?>
   <?php include "pages/navbar.php"; ?>
   <?php include "DB/koneksi.php"; ?>
-  <div class="<?= (isset($_GET['page']) && $_GET['page'] == "cetak-peminjam") || (isset($_GET['page']) && $_GET['page'] == "cetak-user") || (isset($_GET['page']) && $_GET['page'] == "cetak-marketing") ? "container-fluid" : "container" ?>">
+  <div class="<?= (isset($_GET['page']) && $_GET['page'] == "cetak-peminjam") || (isset($_GET['page']) && $_GET['page'] == "cetak-user") || (isset($_GET['page']) && $_GET['page'] == "cetak-marketing") || (isset($_GET['page']) && $_GET['page'] == "cetak-detail-transaksi") ? "container-fluid" : "container" ?>">
     <?php
     $faker = Faker\Factory::create();
     if (isset($_GET['page'])) {
@@ -116,6 +116,23 @@
           include "pages/user/cetak_user.php";
           break;
 
+          #Data Transaksi
+        case 'data-transaksi':
+          include "pages/transaksi/transaksi.php";
+          break;
+
+        case 'detail-transaksi':
+          include "pages/transaksi/detail_transaksi.php";
+          break;
+
+        case 'tambah-transaksi':
+          include "pages/transaksi/tambah_transaksi.php";
+          break;
+
+        case 'cetak-detail-transaksi':
+          include "pages/transaksi/cetak_detail_transaksi.php";
+          break;
+
         default:
           echo "Halaman Tidak ditemukan";
           break;
@@ -133,11 +150,13 @@
     new DataTable('#tabel-peminjam')
     new DataTable('#tabel-user')
     new DataTable('#tabel-marketing')
+    new DataTable('#tabel-transaksi')
+    new DataTable('#tabel-detail-transaksi')
 
     function hapusPeminjam(id) {
       Swal.fire({
         title: 'Hapus data peminjam ini?',
-        text: "Anda tidak akan dapat mengembalikan tindakan ini!",
+        text: "Data Peminjam beserta Transaksi yang ada akan dihapus dan Anda tidak akan dapat mengembalikan tindakan ini!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -148,7 +167,7 @@
         if (result.isConfirmed) {
           Swal.fire({
             title: "Berhasil!",
-            text: "Data Peminjam ini Berhasil dihapus.",
+            text: "Data Peminjam dan transaksi ini Berhasil dihapus.",
             icon: "success"
           });
           setTimeout(function() {

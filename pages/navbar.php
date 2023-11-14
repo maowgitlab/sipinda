@@ -8,7 +8,10 @@
       <?php if (isset($_SESSION['username'])) : ?>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link <?= ($_GET['page'] == "home"  ? "active" : "") ?>" aria-current="page" href="index.php"><i class="fas fa-home fa-sm"></i> Home</a>
+            <a class="nav-link <?= ($_GET['page'] == "home"  ? "active" : "") ?>" aria-current="page" href="?page=home"><i class="fas fa-home fa-sm"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= ($_GET['page'] == "data-transaksi" || $_GET['page'] == "detail-transaksi" || $_GET['page'] == "tambah-transaksi" || $_GET['page'] == "cetak-detail-transaksi" ? "active" : "") ?>" href="?page=data-transaksi"><i class="fas fa-money-bill"></i> Data Transaksi</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?= ($_GET['page'] == "data-peminjam" || ($_GET['page'] == "tambah-peminjam") || ($_GET['page'] == "detail-peminjam") || ($_GET['page'] == "edit-peminjam") || ($_GET['page'] == "cetak-peminjam") ? "active" : "") ?>" href="?page=data-peminjam"><i class="fas fa-server fa-sm"></i> Data Peminjam</a>

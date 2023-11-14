@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `tb_marketing` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table db_sipinda.tb_marketing: ~0 rows (approximately)
+-- Dumping data for table db_sipinda.tb_marketing: ~5 rows (approximately)
 DELETE FROM `tb_marketing`;
 INSERT INTO `tb_marketing` (`id`, `no_marketing`, `nama_marketing`, `kode_cabang`, `unit_head`, `created_at`) VALUES
 	(1, 'S000076323', 'Helda', '11272', '52153', 1699710254),
@@ -56,10 +56,26 @@ CREATE TABLE IF NOT EXISTS `tb_peminjam` (
   `jenis_pencairan` enum('CASH','TRANSFER') COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table db_sipinda.tb_peminjam: ~0 rows (approximately)
+-- Dumping data for table db_sipinda.tb_peminjam: ~1 rows (approximately)
 DELETE FROM `tb_peminjam`;
+
+-- Dumping structure for table db_sipinda.tb_transaksi
+DROP TABLE IF EXISTS `tb_transaksi`;
+CREATE TABLE IF NOT EXISTS `tb_transaksi` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `no_transaksi` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `no_marketing` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_peminjam` int DEFAULT NULL,
+  `angsuran` double NOT NULL DEFAULT '0',
+  `sisa_pinjaman` double NOT NULL DEFAULT '0',
+  `created_at` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table db_sipinda.tb_transaksi: ~1 rows (approximately)
+DELETE FROM `tb_transaksi`;
 
 -- Dumping structure for table db_sipinda.tb_users
 DROP TABLE IF EXISTS `tb_users`;
@@ -76,11 +92,10 @@ CREATE TABLE IF NOT EXISTS `tb_users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table db_sipinda.tb_users: ~0 rows (approximately)
+-- Dumping data for table db_sipinda.tb_users: ~2 rows (approximately)
 DELETE FROM `tb_users`;
 INSERT INTO `tb_users` (`id`, `email`, `username`, `password`, `role`, `terakhir_login`, `terakhir_logout`, `total_login`, `created_at`) VALUES
-	(5, 'admin@gmail.com', 'khadijah', '$2y$10$ObRhOxIkjizZ2R5PWH0nB.e22y1VTzaMf68LOYLxsOhtGDbWOkMRG', 'admin', 1699750586, 1699712204, 4, 1699707725),
-	(7, 'robianoor2002@gmail.com', 'robianoor', '$2y$10$tozhjrB2KnwoFCuwzxhikOP1p9URr4TrOUy.qufrrYs7.NbA7iW.y', 'operator', 1699712208, 1699712213, 1, 1699711270);
+	(5, 'admin@gmail.com', 'khadijah', '$2y$10$ObRhOxIkjizZ2R5PWH0nB.e22y1VTzaMf68LOYLxsOhtGDbWOkMRG', 'admin', 1699919042, 1699942619, 7, 1699707725);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

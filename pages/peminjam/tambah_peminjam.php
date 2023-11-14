@@ -12,16 +12,20 @@ if (isset($_POST['simpan'])) {
   $da_motor = htmlspecialchars($_POST['da_motor']);
   $dicairkan_oleh = htmlspecialchars($_POST['dicairkan_oleh']);
   $top = htmlspecialchars($_POST['top']);
-  $angsuran = htmlspecialchars($_POST['angsuran']);
   $total_pinjaman = htmlspecialchars($_POST['total_pinjaman']);
   $no_kontrak = $_POST['no_kontrak'] ?? null;
   $jenis_pencairan = $_POST['jenis_pencairan'] ?? null;
   $created_at = time();
 
-  if ($nama == null || $alamat == null || $no_telp == null || $da_motor == null || $dicairkan_oleh == null || $top == null || $angsuran == null || $total_pinjaman == null || $no_kontrak == null || $jenis_pencairan == null) {
+  if ($nama == null || $alamat == null || $no_telp == null || $da_motor == null || $dicairkan_oleh == null || $top == null || $total_pinjaman == null || $no_kontrak == null || $jenis_pencairan == null) {
     $invalid = "is-invalid";
   } else {
+    $angsuran = $total_pinjaman / $top;
+    $sisa_pinjaman = $total_pinjaman - $angsuran;
     $query = mysqli_query($koneksi, "INSERT INTO tb_peminjam VALUES(NULL, '$nama', '$alamat', '$no_telp', '$da_motor', '$dicairkan_oleh', '$top', '$angsuran', '$no_kontrak', '$total_pinjaman', '$jenis_pencairan', '$created_at')");
+    $id_peminjam = mysqli_insert_id($koneksi);
+    $no_transaksi = $faker->numerify('TR-####-####-####');
+    mysqli_query($koneksi, "INSERT INTO tb_transaksi (id, no_transaksi, no_marketing, id_peminjam, angsuran, sisa_pinjaman, created_at) VALUES (NULL, '$no_transaksi', '$no_kontrak', '$id_peminjam', '$angsuran', '$sisa_pinjaman', '$created_at');");
     if ($query) {
       echo "
     <script>
@@ -82,7 +86,7 @@ if (isset($_POST['simpan'])) {
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="mb-3">
             <label for="dicairkan_oleh" class="form-label">Dicairkan Oleh</label>
             <input type="text" class="form-control <?= $invalid ?>" id="dicairkan_oleh" name="dicairkan_oleh" value="khadijah">
@@ -93,7 +97,19 @@ if (isset($_POST['simpan'])) {
             <?php endif; ?>
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
+          <label for="total_pinjaman" class="form-label">Total Pinjaman</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Rp</span>
+            <input type="text" class="form-control <?= $invalid ?>" placeholder="1500000" name="total_pinjaman" aria-describedby="basic-addon1">
+            <?php if ($invalid) : ?>
+              <div class="invalid-feedback">
+                Total Pinjaman tidak boleh kosong.
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+        <div class="col-lg-4">
           <label for="top" class="form-label">TOP</label>
           <div class="input-group mb-3">
             <input type="text" class="form-control <?= $invalid ?>" placeholder="12" name="top">
@@ -106,7 +122,7 @@ if (isset($_POST['simpan'])) {
           </div>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-lg-6">
           <label for="angsuran" class="form-label">Angsuran</label>
           <div class="input-group mb-3">
@@ -119,19 +135,8 @@ if (isset($_POST['simpan'])) {
             <?php endif; ?>
           </div>
         </div>
-        <div class="col-lg-6">
-          <label for="total_pinjaman" class="form-label">Total Pinjaman</label>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Rp</span>
-            <input type="text" class="form-control <?= $invalid ?>" placeholder="1500000" name="total_pinjaman" aria-describedby="basic-addon1">
-            <?php if ($invalid) : ?>
-              <div class="invalid-feedback">
-                Total Pinjaman tidak boleh kosong.
-              </div>
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
+
+      </div> -->
       <div class="row">
         <div class="col-lg-6">
           <div class="mb-3">
