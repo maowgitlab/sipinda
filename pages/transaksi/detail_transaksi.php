@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
     <div class="text-center text-lg-start">
       <h1 class="d-lg-inline">Detail Transaksi</h1>
       <a href="?page=cetak-detail-transaksi&transaksi=<?= $no_transaksi ?>" class="btn btn-sm btn-secondary mb-3"><i class="fas fa-print"></i> Cetak</a>
-      <?php if ($query['sisa_pinjaman'] != 0) : ?>
+      <?php if ($query['sisa_pinjaman'] > 0) : ?>
         <a href="?page=tambah-transaksi&transaksi=<?= $no_transaksi ?>" class="btn btn-sm btn-primary mb-3"><i class="fas fa-plus fa-sm"></i> Tambah Data Transaksi</a>
       <?php endif; ?>
       <a href="#" class="btn-sm btn btn-info mb-3 fw-bold">Total Pinjaman: Rp. <?= number_format($query['total_pinjaman'], 0, '.', '.') ?></a>
@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
               <td><?= $no++; ?></td>
               <td><?= $data['nama'] ?></td>
               <td>Rp. <?= number_format($data['angsuran_transaksi'], 0, '.', '.') ?> / BLN</td>
-              <td><?= $data['sisa_pinjaman'] == 0 ? "<small class='badge rounded-pill text-bg-success'><i class='fas fa-check-circle'></i> LUNAS</small>" : "Rp. " . number_format($data['sisa_pinjaman'], 0, '.', '.') ?></td>
+              <td><?= $data['sisa_pinjaman'] == 0 || $data['sisa_pinjaman'] < 0 ? "<small class='badge rounded-pill text-bg-success'><i class='fas fa-check-circle'></i> LUNAS</small>" : "Rp. " . number_format($data['sisa_pinjaman'], 0, '.', '.') ?></td>
               <td><?= date('d F Y H:i', $data['created_at']) ?> WITA</td>
             </tr>
           <?php endforeach; ?>
