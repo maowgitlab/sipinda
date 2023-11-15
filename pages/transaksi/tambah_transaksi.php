@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])) {
 <?php
 $invalid = "";
 $no_transaksi = $_GET['transaksi'];
-$dataTransaksi = mysqli_query($koneksi, "SELECT tb_transaksi.id, tb_transaksi.no_transaksi, tb_transaksi.no_marketing, tb_transaksi.id_peminjam, tb_transaksi.angsuran AS angsuran_transaksi, tb_transaksi.sisa_pinjaman, tb_transaksi.created_at, tb_peminjam.nama, tb_peminjam.total_pinjaman, tb_peminjam.angsuran, tb_marketing.no_marketing, tb_marketing.nama_marketing FROM tb_transaksi JOIN tb_peminjam JOIN tb_marketing ON tb_transaksi.no_marketing = tb_marketing.no_marketing AND tb_transaksi.id_peminjam = tb_peminjam.id WHERE tb_transaksi.no_transaksi = '$no_transaksi'");
+$dataTransaksi = mysqli_query($koneksi, "SELECT tb_transaksi.id, tb_transaksi.no_transaksi, tb_transaksi.no_marketing, tb_transaksi.id_peminjam, tb_transaksi.angsuran AS angsuran_transaksi, tb_transaksi.sisa_pinjaman, tb_transaksi.created_at, tb_peminjam.nama, tb_peminjam.total_pinjaman, tb_peminjam.angsuran, tb_marketing.no_marketing, tb_marketing.nama_marketing FROM tb_transaksi JOIN tb_peminjam JOIN tb_marketing ON tb_transaksi.no_marketing = tb_marketing.no_marketing AND tb_transaksi.id_peminjam = tb_peminjam.id WHERE tb_transaksi.no_transaksi = '$no_transaksi' ORDER BY tb_transaksi.id DESC");
 $data = mysqli_fetch_assoc($dataTransaksi);
 if (isset($_POST['simpan'])) {
   $no_transaksi = htmlspecialchars($_POST['no_transaksi']);
@@ -14,7 +14,7 @@ if (isset($_POST['simpan'])) {
   $id_peminjam = htmlspecialchars($_POST['id_peminjam']);
   $angsuran = htmlspecialchars($_POST['angsuran']);
   $created_at = time();
-
+  
   if ($no_transaksi == null || $no_marketing == null || $id_peminjam == null || $angsuran == null) {
     $invalid = "is-invalid";
   } else {

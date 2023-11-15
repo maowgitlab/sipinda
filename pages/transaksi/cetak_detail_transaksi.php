@@ -1,6 +1,6 @@
 <?php
 $no_transaksi = $_GET['transaksi'];
-$dataTransaksi = mysqli_query($koneksi, "SELECT tb_transaksi.id, tb_transaksi.no_transaksi, tb_transaksi.no_marketing, tb_transaksi.id_peminjam, tb_transaksi.angsuran AS angsuran_transaksi, tb_transaksi.sisa_pinjaman, tb_transaksi.created_at, tb_peminjam.*, tb_marketing.no_marketing, tb_marketing.nama_marketing FROM tb_transaksi JOIN tb_peminjam JOIN tb_marketing ON tb_transaksi.no_marketing = tb_marketing.no_marketing AND tb_transaksi.id_peminjam = tb_peminjam.id WHERE tb_transaksi.no_transaksi = '$no_transaksi'");
+$dataTransaksi = mysqli_query($koneksi, "SELECT tb_transaksi.id, tb_transaksi.no_transaksi, tb_transaksi.no_marketing, tb_transaksi.id_peminjam, tb_transaksi.angsuran AS angsuran_transaksi, tb_transaksi.sisa_pinjaman, tb_transaksi.created_at, tb_peminjam.*, tb_marketing.no_marketing, tb_marketing.nama_marketing FROM tb_transaksi JOIN tb_peminjam JOIN tb_marketing ON tb_transaksi.no_marketing = tb_marketing.no_marketing AND tb_transaksi.id_peminjam = tb_peminjam.id WHERE tb_transaksi.no_transaksi = '$no_transaksi' ORDER BY tb_transaksi.id DESC");
 $query = mysqli_fetch_assoc($dataTransaksi);
 if (!isset($_SESSION['username'])) {
   header('location: ?page=login');
