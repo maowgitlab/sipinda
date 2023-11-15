@@ -76,7 +76,7 @@ if (!isset($_SESSION['username'])) {
           <tr>
             <td class="text-center"><?= $no++; ?></td>
             <td class="text-center">Rp. <?= number_format($data['angsuran_transaksi'], 0, '.', '.') ?> / BLN</td>
-            <td class="text-center"><?= $data['sisa_pinjaman'] == 0 ? "<small class='badge rounded-pill text-bg-success'><i class='fas fa-check-circle'></i> LUNAS</small>" : "Rp. " . number_format($data['sisa_pinjaman'], 0, '.', '.') ?></td>
+            <td class="text-center"><?= $data['sisa_pinjaman'] <= 0.1 ? "<small class='badge rounded-pill text-bg-success'><i class='fas fa-check-circle'></i> LUNAS</small>" : "Rp. " . number_format($data['sisa_pinjaman'], 0, '.', '.') ?></td>
             <td class="text-center"><?= date('d F Y H:i', $data['created_at']) ?> WITA</td>
           </tr>
         <?php endforeach; ?>

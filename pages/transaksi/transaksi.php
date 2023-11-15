@@ -42,7 +42,7 @@ if (!isset($_SESSION['username'])) {
               tb_transaksi.id_peminjam, 
               tb_peminjam.nama, 
               tb_marketing.no_marketing,  
-              tb_marketing.nama_marketing");
+              tb_marketing.nama_marketing ORDER BY tb_transaksi.id DESC");
           ?>
           <?php foreach ($dataTransaksi as $data) : ?>
             <tr>
