@@ -35,14 +35,7 @@ if (!isset($_SESSION['username'])) {
           JOIN 
               tb_peminjam ON tb_transaksi.id_peminjam = tb_peminjam.id
           JOIN 
-              tb_marketing ON tb_transaksi.no_marketing = tb_marketing.no_marketing
-          GROUP BY 
-              tb_transaksi.no_transaksi, 
-              tb_transaksi.no_marketing, 
-              tb_transaksi.id_peminjam, 
-              tb_peminjam.nama, 
-              tb_marketing.no_marketing,  
-              tb_marketing.nama_marketing ORDER BY tb_transaksi.id DESC");
+              tb_marketing ON tb_transaksi.no_marketing = tb_marketing.no_marketing ORDER BY tb_transaksi.id DESC");
           ?>
           <?php foreach ($dataTransaksi as $data) : ?>
             <tr>
